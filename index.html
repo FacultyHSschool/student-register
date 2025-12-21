@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Faculty Higher Secondary School – Result Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f9;
+}
+
+/* TOP BAR */
+.topbar {
+  background: linear-gradient(90deg, #1c3f73, #0b2d52);
+  color: #fff;
+  padding: 8px 20px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* HEADER */
+.header {
+  background: #fff;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.header img { height: 70px; }
+
+.header h1 {
+  margin: 0;
+  font-size: 26px;
+  color: #222;
+}
+
+.header p {
+  margin: 3px 0 0;
+  color: #555;
+}
+
+/* NAVBAR */
+.navbar {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.navbar a {
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #1c3f73;
+}
+
+/* CONTENT */
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2 { text-align: center; color: #1c3f73; }
+
+/* FORM */
+label {
+  font-weight: bold;
+  margin-top: 15px;
+  display: block;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px;
+  width: 100%;
+  background: #1c3f73;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover { background: #142e54; }
+
+/* ERROR MESSAGE */
+.error {
+  color: #c62828;
+  margin-top: 15px;
+  font-weight: bold;
+  display: none;
+  text-align: center;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #333;
+  padding: 10px;
+  text-align: center;
+}
+
+th { background: #e9eff7; }
+
+.summary {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.hidden { display: none; }
+
+footer {
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+  margin: 30px 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>Welcome to Faculty Higher Secondary School, North Guwahati</div>
+  <div id="dateTime"></div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="crest.png" alt="School Crest">
+  <div>
+    <h1>Faculty Higher Secondary School</h1>
+    <p>North Guwahati</p>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <a href="https://facultyschool.org/" target="_blank">Home</a>
+  <a href="https://facultyschool.org/" target="_blank">About</a>
+  <a href="https://facultyschool.org/" target="_blank">Academics</a>
+  <a href="https://facultyschool.org/" target="_blank">Mandatory Disclosure</a>
+  <a href="https://facultyschool.org/" target="_blank">Fee Payment</a>
+  <a href="https://facultyschool.org/" target="_blank">Contact Us</a>
+</div>
+
+<!-- LOGIN -->
+<div class="container" id="formSection">
+  <h2>Student Result Access</h2>
+
+  <label>Student Name</label>
+  <input type="text" id="studentName" placeholder="Enter student name">
+
+  <label>Class</label>
+  <select id="studentClass">
+    <option value="">Select Class</option>
+    <option>Class X</option>
+    <option>Class XII</option>
+  </select>
+
+  <label>Roll Number</label>
+  <input type="text" id="rollNo" placeholder="Enter roll number">
+
+  <button onclick="showResult()">View Result</button>
+
+  <div class="error" id="errorMsg"></div>
+</div>
+
+<!-- RESULT -->
+<div class="container hidden" id="resultSection">
+  <h2>Examination Result</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+    <div><b>Name:</b> Joydeepta Barman</div>
+    <div><b>Roll No.:</b> FHSS2605762</div>
+    <div><b>Class:</b> XII</div>
+    <div><b>Stream:</b> Science</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>Subject</th>
+      <th>Theory</th>
+      <th>Practical / Internal</th>
+      <th>Total</th>
+    </tr>
+    <tr><td>English</td><td>50</td><td>20</td><td>70</td></tr>
+    <tr><td>Physics</td><td>39</td><td>23</td><td>62</td></tr>
+    <tr><td>Chemistry</td><td>30</td><td>30</td><td>60</td></tr>
+    <tr><td>Biology</td><td>38</td><td>30</td><td>68</td></tr>
+    <tr><td>Mathematics</td><td>21</td><td>20</td><td>41</td></tr>
+    <tr><td>Physical Education</td><td>60</td><td>30</td><td>90</td></tr>
+  </table>
+
+  <div class="summary">
+    Best of Five Subjects Applied<br>
+    Grand Total: 350 / 500<br>
+    Percentage: <span style="color:#1c3f73;">70.00%</span><br>
+    Result Status: <span style="color:green;">PASS</span>
+  </div>
+
+  <button onclick="location.reload()">Back</button>
+</div>
+
+<footer>
+  This portal is created strictly for educational and demonstration purposes.
+</footer>
+
+<script>
+function showResult() {
+  const name = document.getElementById("studentName").value.trim();
+  const cls = document.getElementById("studentClass").value;
+  const roll = document.getElementById("rollNo").value.trim();
+  const error = document.getElementById("errorMsg");
+
+  if (name === "" || cls === "" || roll === "") {
+    error.textContent = "Please enter all required credentials to view result.";
+    error.style.display = "block";
+    return;
+  }
+
+  if (name !== "Joydeepta Barman" || roll !== "FHSS2605762") {
+    error.textContent = "Invalid credentials. Please try again.";
+    error.style.display = "block";
+    return;
+  }
+
+  error.style.display = "none";
+  document.getElementById("formSection").classList.add("hidden");
+  document.getElementById("resultSection").classList.remove("hidden");
+}
+
+function updateDateTime() {
+  const now = new Date();
+  const date = now.toLocaleDateString('en-IN', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  const time = now.toLocaleTimeString('en-IN');
+  document.getElementById("dateTime").innerHTML = date + " | " + time;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+</script>
+
+</body>
+</html>
