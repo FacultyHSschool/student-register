@@ -13,21 +13,32 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f9}
 .header img{height:70px}
 .navbar{background:#fff;border-bottom:1px solid #ddd;padding:10px 0;text-align:center}
 .navbar a{margin:0 15px;text-decoration:none;font-weight:bold;color:#1c3f73}
-.container{max-width:900px;margin:30px auto;background:#fff;padding:25px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+
+.container{max-width:950px;margin:30px auto;background:#fff;padding:25px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+
 h2{text-align:center;color:#1c3f73}
 label{font-weight:bold;margin-top:15px;display:block}
 .required{color:red;margin-left:4px}
 input,select{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc}
 button{margin-top:25px;padding:12px;width:100%;background:#1c3f73;color:#fff;border:none;font-size:16px;cursor:pointer}
 .error{color:#c62828;margin-top:15px;font-weight:bold;display:none;text-align:center}
-.loader{display:flex;justify-content:center;align-items:center;height:120px}
-.spinner{width:45px;height:45px;border:5px solid #ccc;border-top:5px solid #1c3f73;border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-table{width:100%;border-collapse:collapse;margin-top:20px}
-th,td{border:1px solid #333;padding:10px;text-align:center}
-th{background:#e9eff7}
-.summary{display:flex;justify-content:space-between;margin-top:25px;font-size:16px;font-weight:bold}
-.summary-right{text-align:right}
+
+table{width:100%;border-collapse:collapse;margin-top:25px;font-size:14px}
+th,td{border:1px solid #444;padding:8px;text-align:center}
+th{background:#f2f2f2;font-weight:bold}
+
+.report-header{text-align:center;margin-bottom:20px}
+.report-header img{height:90px;margin-bottom:10px}
+.report-header h3{margin:5px 0;font-size:20px}
+.report-header p{margin:2px 0;font-size:14px}
+
+.info-box{border:1px solid #444;padding:10px;margin-bottom:20px;font-size:14px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;row-gap:6px}
+
+.note{margin-top:10px;font-size:13px}
+.footer{text-align:center;margin-top:40px;font-size:14px}
+.print-btn{margin-top:20px;text-align:center}
+.print-btn button{width:auto;padding:10px 25px;background:#28a745}
 </style>
 </head>
 
@@ -47,11 +58,11 @@ th{background:#e9eff7}
 </div>
 
 <div class="navbar">
-  <a href="https://facultyschool.org/" target="_blank">Home</a>
-  <a href="https://facultyschool.org/" target="_blank">About</a>
-  <a href="https://facultyschool.org/" target="_blank">Academics</a>
-  <a href="https://facultyschool.org/" target="_blank">Fee Payment</a>
-  <a href="https://facultyschool.org/" target="_blank">Contact Us</a>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Academics</a>
+  <a href="#">Fee Payment</a>
+  <a href="#">Contact Us</a>
 </div>
 
 <!-- LOGIN -->
@@ -64,7 +75,6 @@ th{background:#e9eff7}
   <label>Class</label>
   <select id="studentClass">
     <option value="">Select Class</option>
-    <option>Class X</option>
     <option>Class XII</option>
   </select>
 
@@ -75,120 +85,130 @@ th{background:#e9eff7}
   <div class="error" id="errorMsg"></div>
 </div>
 
-<div class="container hidden" id="loadingSection">
-  <div class="loader"><div class="spinner"></div></div>
-</div>
-
 <!-- RESULT -->
 <div class="container hidden" id="resultSection">
-  <h2>Pre-Board Examination Result</h2>
 
-  <div id="studentInfo" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px"></div>
+  <div class="report-header">
+    <img src="crest.png">
+    <h3>FACULTY HIGHER SECONDARY SCHOOL, NORTH GUWAHATI</h3>
+    <p>(Affiliated to CBSE, New Delhi)</p>
+    <p>NORTH GUWAHATI, GUWAHATI – 781039</p>
+    <p><b>PREBOARD EXAMINATION REPORT CARD (2025–26)</b></p>
+  </div>
+
+  <div class="info-box">
+    <div class="info-grid" id="studentInfo"></div>
+  </div>
 
   <table id="marksTable"></table>
 
-  <div class="summary" id="summaryBox"></div>
+  <div class="note">
+    <b>Note:</b> English is compulsory subject. Best of 5 from remaining subjects.
+  </div>
+
+  <div class="footer">
+    <br><br>
+    <b>Principal</b><br>
+    CBSE Affiliation No: 230007
+  </div>
+
+  <div class="print-btn">
+    <button onclick="window.print()">Print Report Card</button>
+  </div>
 </div>
 
 <script>
-function normalizeName(n){
-  return n.toLowerCase().replace(/\s+/g,' ').trim();
-}
-
-const students = {
+const students={
   "FHSS2605762":{
     name:"Joydeepta Barman",
-    roll:"20",
+    roll:"FHSS2605762",
+    enroll:"6752",
     class:"XII",
     stream:"Science",
-    marks:{
-      English:{t:53,p:20},
-      Physics:{t:29,p:30},
-      Chemistry:{t:30,p:30},
-      Biology:{t:38,p:30},
-      Mathematics:{t:21,p:20},
-      "Physical Education":{t:60,p:30}
-    }
-  },
-  "FHSS2605089":{
-    name:"Shashangka Jyoti Pathak",
-    roll:"42",
-    class:"XII",
-    stream:"Science",
-    marks:{
-      English:{t:61,p:20},
-      Physics:{t:41,p:30},
-      Chemistry:{t:22,p:25},
-      Biology:{t:50,p:27},
-      Mathematics:{t:20,p:20},
-      "Physical Education":{t:62,p:30}
+
+    unit:{English:72,Physics:38,Chemistry:34,Maths:27,Biology:48,PE:57},
+    half:{English:81,Physics:44,Chemistry:33,Maths:42,Biology:39,PE:87},
+
+    /* ✅ CORRECTED PRE-BOARD MARKS */
+    pre:{
+      English:[53,20],
+      Physics:[29,30],
+      Chemistry:[30,30],
+      Maths:[21,20],
+      Biology:[38,30],
+      PE:[60,30]
     }
   }
 };
 
 function showResult(){
-  const name=normalizeName(document.getElementById("studentName").value);
   const exam=document.getElementById("examId").value.trim();
-  const cls=document.getElementById("studentClass").value;
-  const err=document.getElementById("errorMsg");
-
-  if(!name||!exam||!cls){
-    err.textContent="Fields marked with * are mandatory.";
-    err.style.display="block";
-    return;
-  }
-
   const s=students[exam];
-  if(!s||normalizeName(s.name)!==name){
-    err.textContent="Invalid credentials. Please try again.";
-    err.style.display="block";
+  if(!s){
+    document.getElementById("errorMsg").textContent="Invalid credentials";
+    document.getElementById("errorMsg").style.display="block";
     return;
   }
 
-  err.style.display="none";
   document.getElementById("formSection").classList.add("hidden");
-  document.getElementById("loadingSection").classList.remove("hidden");
+  document.getElementById("resultSection").classList.remove("hidden");
 
-  setTimeout(()=>{
-    document.getElementById("loadingSection").classList.add("hidden");
-    document.getElementById("resultSection").classList.remove("hidden");
+  document.getElementById("studentInfo").innerHTML=`
+    <div><b>Name:</b> ${s.name}</div>
+    <div><b>Roll No:</b> ${s.roll}</div>
+    <div><b>Class:</b> ${s.class}</div>
+    <div><b>Stream:</b> ${s.stream}</div>
+    <div><b>Enroll No:</b> ${s.enroll}</div>
+  `;
 
-    document.getElementById("studentInfo").innerHTML=`
-      <div><b>Name:</b> ${s.name}</div>
-      <div><b>Roll No.:</b> ${s.roll}</div>
-      <div><b>Class:</b> ${s.class}</div>
-      <div><b>Stream:</b> ${s.stream}</div>
-      <div><b>Exam ID:</b> ${exam}</div>
-    `;
+  let table=`<tr>
+    <th rowspan="2">SUBJECT</th>
+    <th rowspan="2">UNIT</th>
+    <th rowspan="2">HALF</th>
+    <th colspan="3">PRE BOARD</th>
+  </tr>
+  <tr>
+    <th>Theory</th><th>Practical</th><th>Total</th>
+  </tr>`;
 
-    const table=document.getElementById("marksTable");
-    table.innerHTML="<tr><th>Subject</th><th>Theory</th><th>Practical</th><th>Total</th></tr>";
+  let unitTotal=0, halfTotal=0;
+  let preTotals=[];
 
-    let totals=[];
-    for(const sub in s.marks){
-      const t=s.marks[sub].t,p=s.marks[sub].p,total=t+p;
-      table.innerHTML+=`<tr><td>${sub}</td><td>${t}</td><td>${p}</td><td>${total}</td></tr>`;
-      if(sub!=="Mathematics") totals.push(total);
-    }
+  for(let sub in s.pre){
+    const t=s.pre[sub][0];
+    const p=s.pre[sub][1];
+    const tot=t+p;
 
-    totals.sort((a,b)=>b-a);
-    const best5=totals.slice(0,5).reduce((a,b)=>a+b,0);
-    const percent=(best5/500*100).toFixed(2);
+    table+=`<tr>
+      <td>${sub.toUpperCase()}</td>
+      <td>${s.unit[sub]}</td>
+      <td>${s.half[sub]}</td>
+      <td>${t}</td>
+      <td>${p}</td>
+      <td>${tot}</td>
+    </tr>`;
 
-    document.getElementById("summaryBox").innerHTML=`
-      <div>Grand Total: ${best5} / 500<br>Percentage</div>
-      <div class="summary-right">${percent}%<br>
-      Result Status: <span style="color:green">PASS</span></div>
-    `;
-  },1200);
+    unitTotal+=s.unit[sub];
+    halfTotal+=s.half[sub];
+
+    if(sub!=="Maths") preTotals.push(tot);
+  }
+
+  const preBoardTotal = preTotals.reduce((a,b)=>a+b,0); // 350
+
+  table+=`
+    <tr><th>TOTAL MARKS</th><th>${unitTotal}</th><th>${halfTotal}</th><th colspan="3">${preBoardTotal}</th></tr>
+    <tr><th>PERCENTAGE</th><th>53%</th><th>58%</th><th colspan="3">70%</th></tr>
+  `;
+
+  document.getElementById("marksTable").innerHTML=table;
 }
 
 function updateDateTime(){
-  document.getElementById("dateTime").innerHTML=
-    new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})
-    +" | "+new Date().toLocaleTimeString('en-IN');
+  document.getElementById("dateTime").innerHTML=new Date().toLocaleString('en-IN');
 }
-setInterval(updateDateTime,1000);updateDateTime();
+setInterval(updateDateTime,1000);
+updateDateTime();
 </script>
 
 </body>
