@@ -6,165 +6,163 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f6f9;
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f4f6f9;
+  animation:fadeIn 0.6s ease-in;
+}
+.hidden{display:none;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+.topbar{
+  background:linear-gradient(90deg,#1c3f73,#0b2d52);
+  color:#fff;
+  padding:8px 20px;
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
 }
 
-/* TOP BAR */
-.topbar {
-  background: linear-gradient(90deg, #1c3f73, #0b2d52);
-  color: #fff;
-  padding: 8px 20px;
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.header{
+  background:#fff;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  border-bottom:2px solid #e0e0e0;
+}
+.header img{height:70px;}
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+  text-align:center;
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
+  color:#1c3f73;
 }
 
-/* HEADER */
-.header {
-  background: #fff;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  border-bottom: 2px solid #e0e0e0;
+.container{
+  max-width:900px;
+  margin:30px auto;
+  background:#fff;
+  padding:25px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-.header img { height: 70px; }
+h2{text-align:center;color:#1c3f73;}
 
-.header h1 {
-  margin: 0;
-  font-size: 26px;
-  color: #222;
+label{
+  font-weight:bold;
+  margin-top:15px;
+  display:block;
+}
+.required{color:red;margin-left:4px;}
+
+input,select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc;
 }
 
-.header p {
-  margin: 3px 0 0;
-  color: #555;
+button{
+  margin-top:25px;
+  padding:12px;
+  width:100%;
+  background:#1c3f73;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
 }
 
-/* NAVBAR */
-.navbar {
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-  text-align: center;
+.error{
+  color:#c62828;
+  margin-top:15px;
+  font-weight:bold;
+  display:none;
+  text-align:center;
 }
 
-.navbar a {
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #1c3f73;
+@keyframes shake{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  50%{transform:translateX(5px);}
+  75%{transform:translateX(-5px);}
+  100%{transform:translateX(0);}
+}
+.error.shake{animation:shake 0.4s;}
+
+.loader{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:120px;
+}
+.spinner{
+  width:45px;
+  height:45px;
+  border:5px solid #ccc;
+  border-top:5px solid #1c3f73;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.animate-in{animation:slideUpFade 0.6s ease forwards;}
+@keyframes slideUpFade{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-/* CONTENT */
-.container {
-  max-width: 900px;
-  margin: 30px auto;
-  background: #fff;
-  padding: 25px;
-  border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
 }
-
-h2 { text-align: center; color: #1c3f73; }
-
-/* FORM */
-label {
-  font-weight: bold;
-  margin-top: 15px;
-  display: block;
+th,td{
+  border:1px solid #333;
+  padding:10px;
+  text-align:center;
 }
+th{background:#e9eff7;}
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.summary{
+  display:flex;
+  justify-content:space-between;
+  margin-top:25px;
+  font-size:16px;
+  font-weight:bold;
 }
-
-button {
-  margin-top: 25px;
-  padding: 12px;
-  width: 100%;
-  background: #1c3f73;
-  color: white;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover { background: #142e54; }
-
-/* ERROR MESSAGE */
-.error {
-  color: #c62828;
-  margin-top: 15px;
-  font-weight: bold;
-  display: none;
-  text-align: center;
-}
-
-/* TABLE */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  border: 1px solid #333;
-  padding: 10px;
-  text-align: center;
-}
-
-th { background: #e9eff7; }
-
-.summary {
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.hidden { display: none; }
-
-footer {
-  text-align: center;
-  font-size: 13px;
-  color: #555;
-  margin: 30px 0;
-}
+.summary-right{text-align:right;}
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div>Welcome to Faculty Higher Secondary School, North Guwahati</div>
   <div id="dateTime"></div>
 </div>
 
-<!-- HEADER -->
 <div class="header">
-  <img src="crest.png" alt="School Crest">
+  <img src="crest.png">
   <div>
     <h1>Faculty Higher Secondary School</h1>
     <p>North Guwahati</p>
   </div>
 </div>
 
-<!-- NAVBAR -->
 <div class="navbar">
   <a href="https://facultyschool.org/" target="_blank">Home</a>
   <a href="https://facultyschool.org/" target="_blank">About</a>
   <a href="https://facultyschool.org/" target="_blank">Academics</a>
-  <a href="https://facultyschool.org/" target="_blank">Mandatory Disclosure</a>
   <a href="https://facultyschool.org/" target="_blank">Fee Payment</a>
   <a href="https://facultyschool.org/" target="_blank">Contact Us</a>
 </div>
@@ -173,8 +171,8 @@ footer {
 <div class="container" id="formSection">
   <h2>Student Result Access</h2>
 
-  <label>Student Name</label>
-  <input type="text" id="studentName" placeholder="Enter student name">
+  <label>Student Name<span class="required">*</span></label>
+  <input type="text" id="studentName">
 
   <label>Class</label>
   <select id="studentClass">
@@ -183,34 +181,33 @@ footer {
     <option>Class XII</option>
   </select>
 
-  <label>Roll Number</label>
-  <input type="text" id="rollNo" placeholder="Enter roll number">
+  <label>Exam ID<span class="required">*</span></label>
+  <input type="text" id="rollNo">
 
   <button onclick="showResult()">View Result</button>
-
   <div class="error" id="errorMsg"></div>
 </div>
 
+<div class="container hidden" id="loadingSection">
+  <div class="loader"><div class="spinner"></div></div>
+</div>
+
 <!-- RESULT -->
-<div class="container hidden" id="resultSection">
-  <h2>Examination Result</h2>
+<div class="container hidden animate-in" id="resultSection">
+  <h2>Pre-Board Examination Result</h2>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
     <div><b>Name:</b> Joydeepta Barman</div>
-    <div><b>Roll No.:</b> FHSS2605762</div>
+    <div><b>Roll No.:</b> 20</div>
     <div><b>Class:</b> XII</div>
     <div><b>Stream:</b> Science</div>
+    <div><b>Exam ID:</b> FHSS2605762</div>
   </div>
 
   <table>
-    <tr>
-      <th>Subject</th>
-      <th>Theory</th>
-      <th>Practical / Internal</th>
-      <th>Total</th>
-    </tr>
-    <tr><td>English</td><td>50</td><td>20</td><td>70</td></tr>
-    <tr><td>Physics</td><td>39</td><td>23</td><td>62</td></tr>
+    <tr><th>Subject</th><th>Theory</th><th>Practical</th><th>Total</th></tr>
+    <tr><td>English</td><td>53</td><td>20</td><td>73</td></tr>
+    <tr><td>Physics</td><td>29</td><td>30</td><td>59</td></tr>
     <tr><td>Chemistry</td><td>30</td><td>30</td><td>60</td></tr>
     <tr><td>Biology</td><td>38</td><td>30</td><td>68</td></tr>
     <tr><td>Mathematics</td><td>21</td><td>20</td><td>41</td></tr>
@@ -218,57 +215,56 @@ footer {
   </table>
 
   <div class="summary">
-    Best of Five Subjects Applied<br>
-    Grand Total: 350 / 500<br>
-    Percentage: <span style="color:#1c3f73;">70.00%</span><br>
-    Result Status: <span style="color:green;">PASS</span>
+    <div>Grand Total: 350 / 500<br>Percentage</div>
+    <div class="summary-right">
+      70.00%<br>
+      Result Status: <span style="color:green;">PASS</span>
+    </div>
   </div>
-
-  <button onclick="location.reload()">Back</button>
 </div>
 
-<footer>
-  This portal is created strictly for educational and demonstration purposes.
-</footer>
-
 <script>
-function showResult() {
-  const name = document.getElementById("studentName").value.trim();
-  const cls = document.getElementById("studentClass").value;
-  const roll = document.getElementById("rollNo").value.trim();
-  const error = document.getElementById("errorMsg");
+function normalizeName(n){
+  return n.toLowerCase().replace(/\s+/g,' ').trim();
+}
 
-  if (name === "" || cls === "" || roll === "") {
-    error.textContent = "Please enter all required credentials to view result.";
-    error.style.display = "block";
+function showResult(){
+  const name=normalizeName(document.getElementById("studentName").value);
+  const exam=document.getElementById("rollNo").value.trim();
+  const cls=document.getElementById("studentClass").value;
+  const err=document.getElementById("errorMsg");
+
+  if(!name||!exam||!cls){
+    err.textContent="Fields marked with * are mandatory.";
+    err.style.display="block";
+    err.classList.add("shake");
     return;
   }
 
-  if (name !== "Joydeepta Barman" || roll !== "FHSS2605762") {
-    error.textContent = "Invalid credentials. Please try again.";
-    error.style.display = "block";
+  if(name!==normalizeName("Joydeepta Barman")||exam!=="FHSS2605762"){
+    err.textContent="Invalid credentials. Please try again.";
+    err.style.display="block";
+    err.classList.add("shake");
     return;
   }
 
-  error.style.display = "none";
+  err.style.display="none";
   document.getElementById("formSection").classList.add("hidden");
-  document.getElementById("resultSection").classList.remove("hidden");
+  document.getElementById("loadingSection").classList.remove("hidden");
+
+  setTimeout(()=>{
+    document.getElementById("loadingSection").classList.add("hidden");
+    document.getElementById("resultSection").classList.remove("hidden");
+  },1500);
 }
 
-function updateDateTime() {
-  const now = new Date();
-  const date = now.toLocaleDateString('en-IN', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-  const time = now.toLocaleTimeString('en-IN');
-  document.getElementById("dateTime").innerHTML = date + " | " + time;
+function updateDateTime(){
+  const n=new Date();
+  document.getElementById("dateTime").innerHTML=
+    n.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+
+    " | "+n.toLocaleTimeString('en-IN');
 }
-
-setInterval(updateDateTime, 1000);
-updateDateTime();
+setInterval(updateDateTime,1000);updateDateTime();
 </script>
 
 </body>
