@@ -6,141 +6,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#f4f6f9;
-  animation:fadeIn 0.6s ease-in;
-}
-.hidden{display:none;}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-
-.topbar{
-  background:linear-gradient(90deg,#1c3f73,#0b2d52);
-  color:#fff;
-  padding:8px 20px;
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-}
-
-.header{
-  background:#fff;
-  padding:15px 20px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  border-bottom:2px solid #e0e0e0;
-}
-.header img{height:70px;}
-
-.navbar{
-  background:#fff;
-  border-bottom:1px solid #ddd;
-  padding:10px 0;
-  text-align:center;
-}
-.navbar a{
-  margin:0 15px;
-  text-decoration:none;
-  font-weight:bold;
-  color:#1c3f73;
-}
-
-.container{
-  max-width:900px;
-  margin:30px auto;
-  background:#fff;
-  padding:25px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-
-h2{text-align:center;color:#1c3f73;}
-
-label{
-  font-weight:bold;
-  margin-top:15px;
-  display:block;
-}
-.required{color:red;margin-left:4px;}
-
-input,select{
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  border:1px solid #ccc;
-}
-
-button{
-  margin-top:25px;
-  padding:12px;
-  width:100%;
-  background:#1c3f73;
-  color:#fff;
-  border:none;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.error{
-  color:#c62828;
-  margin-top:15px;
-  font-weight:bold;
-  display:none;
-  text-align:center;
-}
-
-@keyframes shake{
-  0%{transform:translateX(0);}
-  25%{transform:translateX(-5px);}
-  50%{transform:translateX(5px);}
-  75%{transform:translateX(-5px);}
-  100%{transform:translateX(0);}
-}
-.error.shake{animation:shake 0.4s;}
-
-.loader{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:120px;
-}
-.spinner{
-  width:45px;
-  height:45px;
-  border:5px solid #ccc;
-  border-top:5px solid #1c3f73;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-.animate-in{animation:slideUpFade 0.6s ease forwards;}
-@keyframes slideUpFade{
-  from{opacity:0;transform:translateY(25px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:20px;
-}
-th,td{
-  border:1px solid #333;
-  padding:10px;
-  text-align:center;
-}
-th{background:#e9eff7;}
-
-.summary{
-  display:flex;
-  justify-content:space-between;
-  margin-top:25px;
-  font-size:16px;
-  font-weight:bold;
-}
-.summary-right{text-align:right;}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f9}
+.hidden{display:none}
+.topbar{background:linear-gradient(90deg,#1c3f73,#0b2d52);color:#fff;padding:8px 20px;display:flex;justify-content:space-between;font-size:14px}
+.header{background:#fff;padding:15px 20px;display:flex;align-items:center;gap:15px;border-bottom:2px solid #e0e0e0}
+.header img{height:70px}
+.navbar{background:#fff;border-bottom:1px solid #ddd;padding:10px 0;text-align:center}
+.navbar a{margin:0 15px;text-decoration:none;font-weight:bold;color:#1c3f73}
+.container{max-width:900px;margin:30px auto;background:#fff;padding:25px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+h2{text-align:center;color:#1c3f73}
+label{font-weight:bold;margin-top:15px;display:block}
+.required{color:red;margin-left:4px}
+input,select{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc}
+button{margin-top:25px;padding:12px;width:100%;background:#1c3f73;color:#fff;border:none;font-size:16px;cursor:pointer}
+.error{color:#c62828;margin-top:15px;font-weight:bold;display:none;text-align:center}
+.loader{display:flex;justify-content:center;align-items:center;height:120px}
+.spinner{width:45px;height:45px;border:5px solid #ccc;border-top:5px solid #1c3f73;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+th,td{border:1px solid #333;padding:10px;text-align:center}
+th{background:#e9eff7}
+.summary{display:flex;justify-content:space-between;margin-top:25px;font-size:16px;font-weight:bold}
+.summary-right{text-align:right}
 </style>
 </head>
 
@@ -182,7 +69,7 @@ th{background:#e9eff7;}
   </select>
 
   <label>Exam ID<span class="required">*</span></label>
-  <input type="text" id="rollNo">
+  <input type="text" id="examId">
 
   <button onclick="showResult()">View Result</button>
   <div class="error" id="errorMsg"></div>
@@ -193,34 +80,14 @@ th{background:#e9eff7;}
 </div>
 
 <!-- RESULT -->
-<div class="container hidden animate-in" id="resultSection">
+<div class="container hidden" id="resultSection">
   <h2>Pre-Board Examination Result</h2>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
-    <div><b>Name:</b> Joydeepta Barman</div>
-    <div><b>Roll No.:</b> 20</div>
-    <div><b>Class:</b> XII</div>
-    <div><b>Stream:</b> Science</div>
-    <div><b>Exam ID:</b> FHSS2605762</div>
-  </div>
+  <div id="studentInfo" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px"></div>
 
-  <table>
-    <tr><th>Subject</th><th>Theory</th><th>Practical</th><th>Total</th></tr>
-    <tr><td>English</td><td>53</td><td>20</td><td>73</td></tr>
-    <tr><td>Physics</td><td>29</td><td>30</td><td>59</td></tr>
-    <tr><td>Chemistry</td><td>30</td><td>30</td><td>60</td></tr>
-    <tr><td>Biology</td><td>38</td><td>30</td><td>68</td></tr>
-    <tr><td>Mathematics</td><td>21</td><td>20</td><td>41</td></tr>
-    <tr><td>Physical Education</td><td>60</td><td>30</td><td>90</td></tr>
-  </table>
+  <table id="marksTable"></table>
 
-  <div class="summary">
-    <div>Grand Total: 350 / 500<br>Percentage</div>
-    <div class="summary-right">
-      70.00%<br>
-      Result Status: <span style="color:green;">PASS</span>
-    </div>
-  </div>
+  <div class="summary" id="summaryBox"></div>
 </div>
 
 <script>
@@ -228,23 +95,53 @@ function normalizeName(n){
   return n.toLowerCase().replace(/\s+/g,' ').trim();
 }
 
+const students = {
+  "FHSS2605762":{
+    name:"Joydeepta Barman",
+    roll:"20",
+    class:"XII",
+    stream:"Science",
+    marks:{
+      English:{t:53,p:20},
+      Physics:{t:29,p:30},
+      Chemistry:{t:30,p:30},
+      Biology:{t:38,p:30},
+      Mathematics:{t:21,p:20},
+      "Physical Education":{t:60,p:30}
+    }
+  },
+  "FHSS2605089":{
+    name:"Shashangka Jyoti Pathak",
+    roll:"42",
+    class:"XII",
+    stream:"Science",
+    marks:{
+      English:{t:53,p:20},
+      Physics:{t:41,p:30},
+      Chemistry:{t:22,p:25},
+      Biology:{t:46,p:25},
+      Mathematics:{t:20,p:20},
+      "Physical Education":{t:62,p:30}
+    }
+  }
+};
+
 function showResult(){
   const name=normalizeName(document.getElementById("studentName").value);
-  const exam=document.getElementById("rollNo").value.trim();
+  const exam=document.getElementById("examId").value.trim();
   const cls=document.getElementById("studentClass").value;
   const err=document.getElementById("errorMsg");
 
   if(!name||!exam||!cls){
     err.textContent="Fields marked with * are mandatory.";
     err.style.display="block";
-    err.classList.add("shake");
     return;
   }
 
-  if(name!==normalizeName("Joydeepta Barman")||exam!=="FHSS2605762"){
+  const s=students[exam];
+  if(!s||normalizeName(s.name)!==name){
     err.textContent="Invalid credentials. Please try again.";
     err.style.display="block";
-    err.classList.add("shake");
     return;
   }
 
@@ -255,14 +152,41 @@ function showResult(){
   setTimeout(()=>{
     document.getElementById("loadingSection").classList.add("hidden");
     document.getElementById("resultSection").classList.remove("hidden");
-  },1500);
+
+    document.getElementById("studentInfo").innerHTML=`
+      <div><b>Name:</b> ${s.name}</div>
+      <div><b>Roll No.:</b> ${s.roll}</div>
+      <div><b>Class:</b> ${s.class}</div>
+      <div><b>Stream:</b> ${s.stream}</div>
+      <div><b>Exam ID:</b> ${exam}</div>
+    `;
+
+    const table=document.getElementById("marksTable");
+    table.innerHTML="<tr><th>Subject</th><th>Theory</th><th>Practical</th><th>Total</th></tr>";
+
+    let totals=[];
+    for(const sub in s.marks){
+      const t=s.marks[sub].t,p=s.marks[sub].p,total=t+p;
+      table.innerHTML+=`<tr><td>${sub}</td><td>${t}</td><td>${p}</td><td>${total}</td></tr>`;
+      if(sub!=="Mathematics") totals.push(total);
+    }
+
+    totals.sort((a,b)=>b-a);
+    const best5=totals.slice(0,5).reduce((a,b)=>a+b,0);
+    const percent=(best5/500*100).toFixed(2);
+
+    document.getElementById("summaryBox").innerHTML=`
+      <div>Grand Total: ${best5} / 500<br>Percentage</div>
+      <div class="summary-right">${percent}%<br>
+      Result Status: <span style="color:green">PASS</span></div>
+    `;
+  },1200);
 }
 
 function updateDateTime(){
-  const n=new Date();
   document.getElementById("dateTime").innerHTML=
-    n.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+
-    " | "+n.toLocaleTimeString('en-IN');
+    new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})
+    +" | "+new Date().toLocaleTimeString('en-IN');
 }
 setInterval(updateDateTime,1000);updateDateTime();
 </script>
