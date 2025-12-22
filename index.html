@@ -72,9 +72,10 @@ th{background:#f2f2f2;font-weight:bold}
   <label>Student Name<span class="required">*</span></label>
   <input type="text" id="studentName">
 
-  <label>Class</label>
+  <label>Class<span class="required">*</span></label>
   <select id="studentClass">
     <option value="">Select Class</option>
+    <option>Class X</option>
     <option>Class XII</option>
   </select>
 
@@ -123,40 +124,54 @@ const students={
     name:"Joydeepta Barman",
     roll:"FHSS2605762",
     enroll:"6752",
-    class:"XII",
+    class:"Class XII",
     stream:"Science",
-
-    unit:{English:72,Physics:38,Chemistry:34,Maths:27,Biology:48,PE:57},
-    half:{English:81,Physics:44,Chemistry:33,Maths:42,Biology:39,PE:87},
-
-    /* ✅ CORRECTED PRE-BOARD MARKS */
+    unit:{English:72,Physics:38,Chemistry:34,Mathematics:27,Biology:48,"Physical Education":57},
+    half:{English:81,Physics:44,Chemistry:33,Mathematics:42,Biology:39,"Physical Education":87},
     pre:{
       English:[53,20],
       Physics:[29,30],
       Chemistry:[30,30],
-      Maths:[21,20],
       Biology:[38,30],
-      PE:[60,30]
+      Mathematics:[21,20],
+      "Physical Education":[60,30]
     }
   }
 };
 
 function showResult(){
+  const name=document.getElementById("studentName").value.trim();
+  const cls=document.getElementById("studentClass").value;
   const exam=document.getElementById("examId").value.trim();
-  const s=students[exam];
-  if(!s){
-    document.getElementById("errorMsg").textContent="Invalid credentials";
-    document.getElementById("errorMsg").style.display="block";
+  const err=document.getElementById("errorMsg");
+
+  if(!name || !cls || !exam){
+    err.textContent="All fields are mandatory.";
+    err.style.display="block";
     return;
   }
 
+  if(cls !== "Class XII"){
+    err.textContent="Result available only for Class XII.";
+    err.style.display="block";
+    return;
+  }
+
+  const s=students[exam];
+  if(!s){
+    err.textContent="Invalid credentials.";
+    err.style.display="block";
+    return;
+  }
+
+  err.style.display="none";
   document.getElementById("formSection").classList.add("hidden");
   document.getElementById("resultSection").classList.remove("hidden");
 
   document.getElementById("studentInfo").innerHTML=`
     <div><b>Name:</b> ${s.name}</div>
     <div><b>Roll No:</b> ${s.roll}</div>
-    <div><b>Class:</b> ${s.class}</div>
+    <div><b>Class:</b> XII</div>
     <div><b>Stream:</b> ${s.stream}</div>
     <div><b>Enroll No:</b> ${s.enroll}</div>
   `;
@@ -167,39 +182,29 @@ function showResult(){
     <th rowspan="2">HALF</th>
     <th colspan="3">PRE BOARD</th>
   </tr>
-  <tr>
-    <th>Theory</th><th>Practical</th><th>Total</th>
-  </tr>`;
+  <tr><th>Theory</th><th>Practical</th><th>Total</th></tr>`;
 
-  let unitTotal=0, halfTotal=0;
-  let preTotals=[];
+  let unitTotal=0,halfTotal=0,preTotal=0;
 
   for(let sub in s.pre){
-    const t=s.pre[sub][0];
-    const p=s.pre[sub][1];
-    const tot=t+p;
-
-    table+=`<tr>
-      <td>${sub.toUpperCase()}</td>
-      <td>${s.unit[sub]}</td>
-      <td>${s.half[sub]}</td>
-      <td>${t}</td>
-      <td>${p}</td>
-      <td>${tot}</td>
-    </tr>`;
-
+    const t=s.pre[sub][0],p=s.pre[sub][1],tot=t+p;
+    table+=`
+      <tr>
+        <td>${sub.toUpperCase()}</td>
+        <td>${s.unit[sub]}</td>
+        <td>${s.half[sub]}</td>
+        <td>${t}</td>
+        <td>${p}</td>
+        <td>${tot}</td>
+      </tr>`;
     unitTotal+=s.unit[sub];
     halfTotal+=s.half[sub];
-
-    if(sub!=="Maths") preTotals.push(tot);
+    preTotal+=tot;
   }
 
-  const preBoardTotal = preTotals.reduce((a,b)=>a+b,0); // 350
-
   table+=`
-    <tr><th>TOTAL MARKS</th><th>${unitTotal}</th><th>${halfTotal}</th><th colspan="3">${preBoardTotal}</th></tr>
-    <tr><th>PERCENTAGE</th><th>53%</th><th>58%</th><th colspan="3">70%</th></tr>
-  `;
+    <tr><th>TOTAL MARKS</th><th>${unitTotal}</th><th>${halfTotal}</th><th colspan="3">${preTotal}</th></tr>
+    <tr><th>PERCENTAGE</th><th>53%</th><th>58%</th><th colspan="3">70%</th></tr>`;
 
   document.getElementById("marksTable").innerHTML=table;
 }
@@ -207,8 +212,7 @@ function showResult(){
 function updateDateTime(){
   document.getElementById("dateTime").innerHTML=new Date().toLocaleString('en-IN');
 }
-setInterval(updateDateTime,1000);
-updateDateTime();
+setInterval(updateDateTime,1000);updateDateTime();
 </script>
 
 </body>
