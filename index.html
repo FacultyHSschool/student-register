@@ -8,37 +8,110 @@
 <style>
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f9}
 .hidden{display:none}
-.topbar{background:linear-gradient(90deg,#1c3f73,#0b2d52);color:#fff;padding:8px 20px;display:flex;justify-content:space-between;font-size:14px}
-.header{background:#fff;padding:15px 20px;display:flex;align-items:center;gap:15px;border-bottom:2px solid #e0e0e0}
-.header img{height:70px}
-.navbar{background:#fff;border-bottom:1px solid #ddd;padding:10px 0;text-align:center}
-.navbar a{margin:0 15px;text-decoration:none;font-weight:bold;color:#1c3f73}
 
-.container{max-width:950px;margin:30px auto;background:#fff;padding:25px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+/* TOP BAR */
+.topbar{
+  background:linear-gradient(90deg,#1c3f73,#0b2d52);
+  color:#fff;
+  padding:8px 20px;
+  display:flex;
+  justify-content:space-between;
+  font-size:14px
+}
+
+/* HEADER */
+.header{
+  background:#fff;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  border-bottom:2px solid #e0e0e0
+}
+.header img{height:70px}
+
+/* NAVBAR */
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+  text-align:center
+}
+.navbar a{
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
+  color:#1c3f73
+}
+
+/* CONTAINER */
+.container{
+  max-width:950px;
+  margin:30px auto;
+  background:#fff;
+  padding:25px;
+  box-shadow:0 2px 10px rgba(0,0,0,.1)
+}
 
 h2{text-align:center;color:#1c3f73}
 label{font-weight:bold;margin-top:15px;display:block}
-.required{color:red;margin-left:4px}
-input,select{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc}
-button{margin-top:25px;padding:12px;width:100%;background:#1c3f73;color:#fff;border:none;font-size:16px;cursor:pointer}
-.error{color:#c62828;margin-top:15px;font-weight:bold;display:none;text-align:center}
+.required{color:red}
+input,select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc
+}
+button{
+  margin-top:25px;
+  padding:12px;
+  width:100%;
+  background:#1c3f73;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  cursor:pointer
+}
+.error{
+  color:#c62828;
+  margin-top:15px;
+  font-weight:bold;
+  display:none;
+  text-align:center
+}
 
-table{width:100%;border-collapse:collapse;margin-top:25px;font-size:14px}
-th,td{border:1px solid #444;padding:8px;text-align:center}
-th{background:#f2f2f2;font-weight:bold}
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:25px;
+  font-size:14px
+}
+th,td{
+  border:1px solid #444;
+  padding:8px;
+  text-align:center
+}
+th{background:#f2f2f2}
 
+/* REPORT */
 .report-header{text-align:center;margin-bottom:20px}
 .report-header img{height:90px;margin-bottom:10px}
-.report-header h3{margin:5px 0;font-size:20px}
-.report-header p{margin:2px 0;font-size:14px}
+.info-box{border:1px solid #444;padding:10px;margin-bottom:20px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 
-.info-box{border:1px solid #444;padding:10px;margin-bottom:20px;font-size:14px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;row-gap:6px}
+.print-btn{text-align:center;margin-top:20px}
+.print-btn button{
+  background:#28a745;
+  color:#fff;
+  padding:10px 25px;
+  border:none;
+  font-size:15px
+}
 
-.note{margin-top:10px;font-size:13px}
-.footer{text-align:center;margin-top:40px;font-size:14px}
-.print-btn{margin-top:20px;text-align:center}
-.print-btn button{width:auto;padding:10px 25px;background:#28a745}
+@media(max-width:600px){
+  .info-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -57,29 +130,30 @@ th{background:#f2f2f2;font-weight:bold}
   </div>
 </div>
 
-<div class="navbar">
-  <a href="#">Home</a>
-  <a href="#">About</a>
-  <a href="#">Academics</a>
-  <a href="#">Fee Payment</a>
-  <a href="#">Contact Us</a>
+<!-- NAVBAR (LOGIN ONLY) -->
+<div class="navbar" id="navbar">
+  <a href="https://facultyschool.org/" target="_blank">Home</a>
+  <a href="https://facultyschool.org/" target="_blank">About</a>
+  <a href="https://facultyschool.org/" target="_blank">Academics</a>
+  <a href="https://facultyschool.org/" target="_blank">Fee Payment</a>
+  <a href="https://facultyschool.org/" target="_blank">Contact Us</a>
 </div>
 
 <!-- LOGIN -->
 <div class="container" id="formSection">
   <h2>Student Result Access</h2>
 
-  <label>Student Name<span class="required">*</span></label>
+  <label>Student Name <span class="required">*</span></label>
   <input type="text" id="studentName">
 
-  <label>Class<span class="required">*</span></label>
+  <label>Class</label>
   <select id="studentClass">
     <option value="">Select Class</option>
     <option>Class X</option>
     <option>Class XII</option>
   </select>
 
-  <label>Exam ID<span class="required">*</span></label>
+  <label>Exam ID <span class="required">*</span></label>
   <input type="text" id="examId">
 
   <button onclick="showResult()">View Result</button>
@@ -89,12 +163,18 @@ th{background:#f2f2f2;font-weight:bold}
 <!-- RESULT -->
 <div class="container hidden" id="resultSection">
 
+  <!-- EXACT HEADER AS YOU ASKED -->
   <div class="report-header">
-    <img src="crest.png">
-    <h3>FACULTY HIGHER SECONDARY SCHOOL, NORTH GUWAHATI</h3>
-    <p>(Affiliated to CBSE, New Delhi)</p>
-    <p>NORTH GUWAHATI, GUWAHATI – 781039</p>
-    <p><b>PREBOARD EXAMINATION REPORT CARD (2025–26)</b></p>
+    <img src="crest.png" style="display:block;margin:0 auto 10px;">
+
+    <div style="font-weight:bold;font-size:20px;">
+      FACULTY HIGHER SECONDARY SCHOOL, NORTH GUWAHATI
+    </div>
+    <div>(Affiliated to CBSE, New Delhi)</div>
+    <div>NORTH GUWAHATI, GUWAHATI – 781039</div>
+    <div style="margin-top:6px;font-weight:bold;">
+      PREBOARD EXAMINATION REPORT CARD (2025–26)
+    </div>
   </div>
 
   <div class="info-box">
@@ -103,22 +183,16 @@ th{background:#f2f2f2;font-weight:bold}
 
   <table id="marksTable"></table>
 
-  <div class="note">
-    <b>Note:</b> English is compulsory subject. Best of 5 from remaining subjects.
-  </div>
-
-  <div class="footer">
-    <br><br>
-    <b>Principal</b><br>
-    CBSE Affiliation No: 230007
-  </div>
-
   <div class="print-btn">
     <button onclick="window.print()">Print Report Card</button>
   </div>
 </div>
 
 <script>
+function normalize(str){
+  return str.toLowerCase().replace(/\s+/g," ").trim();
+}
+
 const students={
   "FHSS2605762":{
     name:"Joydeepta Barman",
@@ -126,93 +200,89 @@ const students={
     enroll:"6752",
     class:"Class XII",
     stream:"Science",
-    unit:{English:72,Physics:38,Chemistry:34,Mathematics:27,Biology:48,"Physical Education":57},
-    half:{English:81,Physics:44,Chemistry:33,Mathematics:42,Biology:39,"Physical Education":87},
-    pre:{
-      English:[53,20],
-      Physics:[29,30],
-      Chemistry:[30,30],
-      Biology:[38,30],
-      Mathematics:[21,20],
-      "Physical Education":[60,30]
-    }
+    unit:{English:54,Physics:30,Chemistry:32,Maths:35,Biology:50,PE:94},
+    half:{English:81,Physics:44,Chemistry:33,Maths:42,Biology:39,PE:87},
+    pre:{English:[53,20],Physics:[29,30],Chemistry:[30,30],Maths:[21,20],Biology:[38,30],PE:[60,30]}
+  },
+  "FHSS2605089":{
+    name:"Shashangka Jyoti Pathak",
+    roll:"FHSS2605089",
+    enroll:"8798",
+    class:"Class XII",
+    stream:"Science",
+    unit:{English:64,Physics:22,Chemistry:22,Maths:35,Biology:14,PE:80},
+    half:{English:69,Physics:16,Chemistry:9,Maths:32,Biology:17.5,PE:76},
+    pre:{English:[52,20],Physics:[32,28],Chemistry:[22,22],Maths:[19,22],Biology:[38,30],PE:[60,30]}
   }
 };
 
+function bestOfFive(arr){
+  return arr.sort((a,b)=>b-a).slice(0,5).reduce((a,b)=>a+b,0);
+}
+
 function showResult(){
-  const name=document.getElementById("studentName").value.trim();
+  const name=document.getElementById("studentName").value;
   const cls=document.getElementById("studentClass").value;
   const exam=document.getElementById("examId").value.trim();
   const err=document.getElementById("errorMsg");
 
-  if(!name || !cls || !exam){
-    err.textContent="All fields are mandatory.";
-    err.style.display="block";
-    return;
-  }
-
-  if(cls !== "Class XII"){
-    err.textContent="Result available only for Class XII.";
-    err.style.display="block";
-    return;
-  }
-
   const s=students[exam];
-  if(!s){
-    err.textContent="Invalid credentials.";
+  if(!s || normalize(s.name)!==normalize(name) || s.class!==cls){
     err.style.display="block";
+    err.textContent="Invalid credentials";
     return;
   }
 
-  err.style.display="none";
+  document.getElementById("navbar").style.display="none";
   document.getElementById("formSection").classList.add("hidden");
   document.getElementById("resultSection").classList.remove("hidden");
 
   document.getElementById("studentInfo").innerHTML=`
     <div><b>Name:</b> ${s.name}</div>
     <div><b>Roll No:</b> ${s.roll}</div>
-    <div><b>Class:</b> XII</div>
+    <div><b>Class:</b> ${s.class}</div>
     <div><b>Stream:</b> ${s.stream}</div>
     <div><b>Enroll No:</b> ${s.enroll}</div>
   `;
 
   let table=`<tr>
     <th rowspan="2">SUBJECT</th>
-    <th rowspan="2">UNIT</th>
-    <th rowspan="2">HALF</th>
+    <th rowspan="2">UNIT TEST</th>
+    <th rowspan="2">HALF YEARLY</th>
     <th colspan="3">PRE BOARD</th>
   </tr>
   <tr><th>Theory</th><th>Practical</th><th>Total</th></tr>`;
 
-  let unitTotal=0,halfTotal=0,preTotal=0;
-
+  let unitArr=[],halfArr=[],preArr=[];
   for(let sub in s.pre){
     const t=s.pre[sub][0],p=s.pre[sub][1],tot=t+p;
-    table+=`
-      <tr>
-        <td>${sub.toUpperCase()}</td>
-        <td>${s.unit[sub]}</td>
-        <td>${s.half[sub]}</td>
-        <td>${t}</td>
-        <td>${p}</td>
-        <td>${tot}</td>
-      </tr>`;
-    unitTotal+=s.unit[sub];
-    halfTotal+=s.half[sub];
-    preTotal+=tot;
+    table+=`<tr>
+      <td>${sub.toUpperCase()}</td>
+      <td>${s.unit[sub]}</td>
+      <td>${s.half[sub]}</td>
+      <td>${t}</td><td>${p}</td><td>${tot}</td>
+    </tr>`;
+    unitArr.push(s.unit[sub]);
+    halfArr.push(s.half[sub]);
+    preArr.push(tot);
   }
 
   table+=`
-    <tr><th>TOTAL MARKS</th><th>${unitTotal}</th><th>${halfTotal}</th><th colspan="3">${preTotal}</th></tr>
-    <tr><th>PERCENTAGE</th><th>53%</th><th>58%</th><th colspan="3">70%</th></tr>`;
+    <tr>
+      <th>PERCENTAGE</th>
+      <th>${(bestOfFive(unitArr)/500*100).toFixed(1)}%</th>
+      <th>${(bestOfFive(halfArr)/500*100).toFixed(1)}%</th>
+      <th colspan="3">${(bestOfFive(preArr)/500*100).toFixed(1)}%</th>
+    </tr>`;
 
   document.getElementById("marksTable").innerHTML=table;
 }
 
 function updateDateTime(){
-  document.getElementById("dateTime").innerHTML=new Date().toLocaleString('en-IN');
+  document.getElementById("dateTime").innerHTML=new Date().toLocaleString("en-IN");
 }
-setInterval(updateDateTime,1000);updateDateTime();
+setInterval(updateDateTime,1000);
+updateDateTime();
 </script>
 
 </body>
