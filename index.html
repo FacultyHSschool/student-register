@@ -130,7 +130,6 @@ th{background:#f2f2f2}
   </div>
 </div>
 
-<!-- NAVBAR (LOGIN ONLY) -->
 <div class="navbar" id="navbar">
   <a href="https://facultyschool.org/" target="_blank">Home</a>
   <a href="https://facultyschool.org/" target="_blank">About</a>
@@ -163,10 +162,8 @@ th{background:#f2f2f2}
 <!-- RESULT -->
 <div class="container hidden" id="resultSection">
 
-  <!-- EXACT HEADER AS YOU ASKED -->
   <div class="report-header">
-    <img src="crest.png" style="display:block;margin:0 auto 10px;">
-
+    <img src="crest.png">
     <div style="font-weight:bold;font-size:20px;">
       FACULTY HIGHER SECONDARY SCHOOL, NORTH GUWAHATI
     </div>
@@ -200,25 +197,24 @@ const students={
     enroll:"6752",
     class:"Class XII",
     stream:"Science",
-    unit:{English:54,Physics:30,Chemistry:32,Maths:35,Biology:50,PE:94},
-    half:{English:81,Physics:44,Chemistry:33,Maths:42,Biology:39,PE:87},
-    pre:{English:[53,20],Physics:[29,30],Chemistry:[30,30],Maths:[21,20],Biology:[38,30],PE:[60,30]}
+
+    unit:{English:72,Physics:38,Chemistry:34,Biology:48,Maths:27,PE:57},
+    half:{English:81,Physics:44,Chemistry:33,Biology:39,Maths:31,PE:82},
+    pre:{English:[53,20],Physics:[29,30],Chemistry:[30,30],Biology:[38,30],Maths:[31,10],PE:[60,30]}
   },
+
   "FHSS2605089":{
     name:"Shashangka Jyoti Pathak",
     roll:"FHSS2605089",
     enroll:"8798",
     class:"Class XII",
     stream:"Science",
+
     unit:{English:64,Physics:22,Chemistry:22,Maths:35,Biology:14,PE:80},
     half:{English:69,Physics:16,Chemistry:9,Maths:32,Biology:17.5,PE:76},
     pre:{English:[52,20],Physics:[32,28],Chemistry:[22,22],Maths:[19,22],Biology:[38,30],PE:[60,30]}
   }
 };
-
-function bestOfFive(arr){
-  return arr.sort((a,b)=>b-a).slice(0,5).reduce((a,b)=>a+b,0);
-}
 
 function showResult(){
   const name=document.getElementById("studentName").value;
@@ -245,37 +241,43 @@ function showResult(){
     <div><b>Enroll No:</b> ${s.enroll}</div>
   `;
 
-  let table=`<tr>
-    <th rowspan="2">SUBJECT</th>
-    <th rowspan="2">UNIT TEST</th>
-    <th rowspan="2">HALF YEARLY</th>
-    <th colspan="3">PRE BOARD</th>
-  </tr>
-  <tr><th>Theory</th><th>Practical</th><th>Total</th></tr>`;
+  document.getElementById("marksTable").innerHTML=`
+<tr>
+  <th rowspan="2">SUBJECT</th>
+  <th rowspan="2">UNIT</th>
+  <th rowspan="2">HALF</th>
+  <th colspan="3">PRE BOARD</th>
+</tr>
+<tr>
+  <th>Theory</th><th>Practical</th><th>Total</th>
+</tr>
 
-  let unitArr=[],halfArr=[],preArr=[];
-  for(let sub in s.pre){
-    const t=s.pre[sub][0],p=s.pre[sub][1],tot=t+p;
-    table+=`<tr>
-      <td>${sub.toUpperCase()}</td>
-      <td>${s.unit[sub]}</td>
-      <td>${s.half[sub]}</td>
-      <td>${t}</td><td>${p}</td><td>${tot}</td>
-    </tr>`;
-    unitArr.push(s.unit[sub]);
-    halfArr.push(s.half[sub]);
-    preArr.push(tot);
-  }
+${Object.keys(s.unit).map(sub=>{
+  const t=s.pre[sub][0],p=s.pre[sub][1];
+  return `<tr>
+    <td>${sub.toUpperCase()}</td>
+    <td>${s.unit[sub]}</td>
+    <td>${s.half[sub]}</td>
+    <td>${t}</td>
+    <td>${p}</td>
+    <td>${t+p}</td>
+  </tr>`;
+}).join("")}
 
-  table+=`
-    <tr>
-      <th>PERCENTAGE</th>
-      <th>${(bestOfFive(unitArr)/500*100).toFixed(1)}%</th>
-      <th>${(bestOfFive(halfArr)/500*100).toFixed(1)}%</th>
-      <th colspan="3">${(bestOfFive(preArr)/500*100).toFixed(1)}%</th>
-    </tr>`;
+<tr>
+  <th>TOTAL MARKS</th>
+  <th>276</th>
+  <th>326</th>
+  <th colspan="3">401</th>
+</tr>
 
-  document.getElementById("marksTable").innerHTML=table;
+<tr>
+  <th>PERCENTAGE</th>
+  <th>53%</th>
+  <th>58%</th>
+  <th colspan="3">72%</th>
+</tr>
+`;
 }
 
 function updateDateTime(){
